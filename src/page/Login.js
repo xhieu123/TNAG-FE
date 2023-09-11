@@ -3,11 +3,36 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { register, login } from "../service/usersService";
 import "./style.css";
+import {useFormik} from "formik";
+import * as Yup from 'yup';
+
+const LoginSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    password: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+});
 
 export default function Login() {
+
     const [isSignUpActive, setIsSignUpActive] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const formikLogin = useFormik({
+        initialValues:{
+            email: "",
+            password: ""
+        },
+        validationSchema: LoginSchema,
+        onSubmit:(values)=>{
+            handleLogin()
+        }
+    })
 
     const handleSignUpClick = () => {
         setIsSignUpActive(true);
@@ -40,6 +65,7 @@ export default function Login() {
 
     return (
         <>
+            {/*đăng ký*/}
             <div className={`container ${isSignUpActive ? "right-panel-active" : ""}`}>
                 <div className="form-container sign-up-container">
                     <form onSubmit={handleRegister}>
@@ -86,30 +112,44 @@ export default function Login() {
                         </button>
                     </form>
                 </div>
+
+                {/*Đăng nhập*/}
                 <div className="form-container sign-in-container">
                     <form onSubmit={handleLogin}>
                         <h1 className="log1">Đăng nhập</h1>
                         <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                            <input className="input100" type="email" name="email" placeholder="Email" id="emailLog"/>
+                            <input value={formikLogin.values.email}
+                                   onChange={formikLogin.handleChange}  className="input100" type="email" name="email" placeholder="Email" id="emailLog"/>
+                            {formikLogin.errors.email && formikLogin.touched.email ? (
+                                <span className="focus-input100">{formikLogin.errors.email}</span>
+                            ) : null}
                             <span className="focus-input100"></span>
                             <span className="form-message2"></span>
                             <span className="symbol-input100">
                 <i className="fa fa-envelope" aria-hidden="true"></i>
-              </span>
+                            </span>
                         </div>
+
                         <div className="wrap-input100 validate-input" data-validate="Password is required">
-                            <input className="input100" type="password" name="password" placeholder="Mật khẩu" id="passwordLog"/>
+                            <input value={formikLogin.values.password}
+                                   onChange={formikLogin.handleChange} className="input100" type="password" name="password" placeholder="Mật khẩu" id="passwordLog"/>
+                            {formikLogin.errors.password && formikLogin.touched.password ? (
+                                <span className="focus-input100">{formikLogin.errors.email}</span>
+                            ) : null}
                             <span className="focus-input100"></span>
                             <span className="form-message2"></span>
                             <span className="symbol-input100">
                 <i className="fa fa-lock" aria-hidden="true"></i>
               </span>
                         </div>
-                        <button type="submit" className="log">
+                            <button type="submit" className="log">
                             Đăng nhập
-                        </button>
-                    </form>
+                            </button>
+
+                         </form>
                 </div>
+
+                {/*nút chuyển trạng trái đăng ký đăng nhập*/}
                 <div className="overlay-container">
                     <div className="overlay">
                         <div className="overlay-panel overlay-left">
