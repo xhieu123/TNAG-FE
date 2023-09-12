@@ -4,6 +4,8 @@ import {Route, Routes} from "react-router-dom";
 import Login from "./page/Login";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Home from "./page/Home/Home";
+import AddFood from "./page/merchant/addFood";
 
 
 function App() {
@@ -11,7 +13,8 @@ function App() {
         <>
             <div className={'container-fluid'}>
                 <Routes>
-                    <Route path={''} element={<Login/>}></Route>
+                    <Route path={''} element={<AddFood/>}></Route>
+                    <Route path={''} element={<Home/>}></Route>
                 </Routes>
             </div>
             <ToastContainer theme={"colored"} position={"top-center"} />

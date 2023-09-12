@@ -103,7 +103,7 @@ export default function Login() {
                             <span className="focus-input100"></span>
                             <span className="form-message2"></span>
                             <span className="symbol-input100">
-                <i className="fa fa-envelope" aria-hidden="true"></i>
+                            <i className="fa fa-envelope" aria-hidden="true"></i>
                             </span>
                         </div>
 
@@ -112,9 +112,10 @@ export default function Login() {
                             <span className="focus-input100"></span>
                             <span className="form-message2"></span>
                             <span className="symbol-input100">
-                <i className="fa fa-lock" aria-hidden="true"></i>
-              </span>
+                            <i className="fa fa-lock" aria-hidden="true"></i>
+                            </span>
                         </div>
+
                             <button type="submit" className="log">
                             Đăng nhập
                             </button>

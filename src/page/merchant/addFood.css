@@ -1,0 +1,28 @@
+.container-add h1{
+    text-align: center;
+    color: red;
+    font-family: 'Dancing Script', cursive;
+}
+
+
+.wrap-input1000 {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 10px;
+    margin-right: -30px;
+}
+.form-add {
+    display: flex;
+    width: 100%;
+
+}
+.btn-save{
+    margin-left: 95px;
+}
+.add-left{
+    width: 50%;
+}
+.add-right{
+    width: 50%;
+}
